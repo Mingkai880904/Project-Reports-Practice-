@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+
+
+<body>
+<img src="{{url_for('static',filename='ksu.jpg')}}" class="center">
+<h1>Kun Shan University</h1>
+<p>本系發展方向於100年時，配合雲端服務與智慧手機的興盛，修改為雲端智慧服務、行動智慧介面與嵌入式智慧終端開發等三大領域，配合規劃的發展方向整合教師專長再分工。自98學年度評鑑後以來，本系在爭取計畫、參加各項比賽、學生實習或考取證照上，都有長足的進步、倍數的成長，並於103年度教育部評鑑中獲得一等通過。目前資工系亦配合資訊領域的發展趨勢，在課程中、研究方向融入物聯網、大數據分析、人工智慧、資訊安全的元素，以建構更佳的教學研究環境，以培育優秀的未來資訊人才。
+
+    本系持續配合科技的進步，調整方向，尤其在面對少子化的趨勢，全系教師都有一致的共識，不斷在研究與技能上與時俱進，更在課程上不斷配合科技進步與產業趨勢調整，以期在各項績效上能不斷提升，累積本系招生知名度，以達永續經營之目標。</p>
+
+<link rel="stylesheet" type="text/css"
+ href="{{url_for(filename='style.css')}}">
+
+
+<div class="container">
+ <div class="card">
+  <img src="{{url_for('static',filename='ksu2.jpg')}}" alt=""/>
+  <div class="info">
+      <form action="/ksu1" method="POST" target="_blank">
+      <button name="forwardBtn1" type="submit">View More</button>
+      </form>
+      <p>Hello Student</p>
+  </div>
+</div>
+
+<div class="card">
+   <img src="{{url_for('static',filename='ksu2.jpg')}}" alt=""/>
+     <div class="info">
+         <button>View More</button>
+         <p>Hello Student</p>
+     </div>
+   </div>
+
+</body>
+</html>
