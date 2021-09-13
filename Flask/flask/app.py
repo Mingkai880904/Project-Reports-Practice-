@@ -56,10 +56,10 @@ def web2():
 
 
     if(prediction[0][0]>prediction[0][1]):
-        a=('normal',prediction[0][0])  
+        a=("正常",prediction[0][0])  
         print(a)
     else:
-        a = ('pneumonia',prediction[0][1])
+        a = ("肺炎",prediction[0][1])
         print(a)
     response = a
     return render_template('上傳.html',prediction = response)
