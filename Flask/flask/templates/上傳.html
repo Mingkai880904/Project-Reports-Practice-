@@ -42,12 +42,14 @@
       </div>
     </div>
   </nav>
+  <img src="/static/logo-og.png" alt="KSU Logo" width="800" height="250">
   <div class="py-5">
+    <marquee direction="right" height="50" width="2000">感謝所有防疫第一線的醫護人員，有你真好!!!!!!</marquee>
     <div class="container">
       <div class="row">
         <div
           class="px-md-5 p-3 col-lg-6 d-flex flex-column align-items-start justify-content-center order-1 order-lg-2">
-
+          <!-- 跑馬燈 -->
           <div>
             <h1 class="display-4" float: left>醫師您好，歡迎登入</h1><br>
 
@@ -64,33 +66,25 @@
                   <a href="/web" class="btn btn-secondary" onclick="window.location.reload()">重試</a>
                 </div>
                 <br>
+                <div class="blockquote mb-0">
+                  <h1 class="display-4" float: left>辨識結果如下:</h1>
+                  <h1 class="display-4" float: left>model</h1>
+                  <div id="preview" name="imagefile"></div>
+                  {% if prediction %}
+                  <p class="text-center"> 辨識結果:{{prediction}}</p>
+                  {% endif %}
+                  <br><br><br><br>
+                  <div align="center" style="position:relative">
+                    <input name="print" type="button" value="列印此頁" onClick="varitext()" class="print">
+                  </div>
+                  <br>
+                  <div id="time" style="background-color:pink;"></div>
               </form>
             </body>
-
-
           </div>
         </div>
       </div>
     </div>
-    <div class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="p-3 col-md-8">
-            <div class="blockquote mb-0">
-              <h1 class="display-4" float: left>辨識結果如下:</h1><br>
-              <h1 class="display-4" float: left>model</h1>
-              <div id="preview" name="imagefile"></div>
-              {% if prediction %}
-              <p class="text-center"> 辨識結果:{{prediction}}</p>
-              {% endif %}
-              <br><br><br><br>
-              <input name="print" type="button" value="列印此頁" onClick="varitext()" class="print">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="py-3">
       <div class="container">
         <div class="row">
@@ -113,6 +107,7 @@
                 </a>
               </div>
             </div>
+
           </div>
         </div>
         <div class="row">
@@ -157,6 +152,15 @@
         transform: translate(100%, -50%);
         /* 3.使用translate讓元素移動自身的(X:100%,Y:-50%)距離 */
       }
+
+      .time {
+        width: 300px;
+        height: 50px;
+        line-height: 60px;
+        margin: 0px auto;
+        text-align: center;
+        border: 1px dotted #ccc;
+      }
     </style>
     <script>
 
@@ -199,6 +203,28 @@
       function varitext() {
         var text = document
         print(text)
+      }
+
+      //-------------時間-------------
+      let newTimer = () => {
+        let date = new Date();
+        let str = date.toLocaleDateString();
+        str += "  " + week();
+        str += "  " + date.toLocaleTimeString();
+        let odiv = document.getElementById("time");
+        odiv.innerHTML = str;
+        setTimeout(newTimer, 1000);
+      }
+      let week = () => {
+        let d, day, x, s = " ";
+        x = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        d = new Date();
+        day = d.getDay();
+        return (s += x[day]);
+      }
+
+      window.onload = () => {
+        newTimer();
       }
     </script>
 
