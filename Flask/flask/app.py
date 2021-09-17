@@ -13,7 +13,11 @@ from keras.preprocessing.image import load_img
 
 @app.route('/')
 def index():
-	return render_template('首頁.html')
+	return render_template('index.html')
+
+@app.route('/Sign_up', methods=['GET'])
+def signup():
+        return render_template('Sign_up.html')
 
 
 @app.route('/web', methods=['GET'])

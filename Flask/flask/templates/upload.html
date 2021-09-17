@@ -1,103 +1,106 @@
 <!DOCTYPE html>
 <html>
 
-<h2>練習 : 製作上傳圖片的區塊</h2>
-<div id="preview"></div>
-<input type="file" id="fileUploader" class="display_none" onchange="handleFiles(this.files)"/>
-<div id="upload_zone" class="upload_zone">
-    請將要上傳的圖片拖曳至此
-</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>Product</title>
+  <meta name="description" content="Wireframe design of a product display by Pingendo">
+  <meta name="keywords" content="Pingendo bootstrap example template wireframe product">
+  <meta name="author" content="Pingendo">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="wireframe.css">
+</head>
 
+<body>
+  <footer></footer>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container"> <a class="navbar-brand text-primary" href="#">
+        <i class="fa d-inline fa-lg fa-circle-o"></i>
+        <b> BRAND</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar5">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar5">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">Product</a> </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="#">Services</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
+        </ul> <a class="btn btn-outline-primary navbar-btn ml-md-2">Contact us</a>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 order-2 order-lg-1"> <img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-tablet.svg"> </div>
+        <div class="px-md-5 p-3 col-lg-6 d-flex flex-column align-items-start justify-content-center order-1 order-lg-2">
+          <h1 class="display-4" contenteditable="true" style="">醫師您好，歡迎登入</h1>
+          <div class="row">
+            <div class="col-6 col-md-12">
+              <h5>請點選"影像上傳"按鈕上傳X光檔案</h5>
+              <p>A wonderful serenity has taken possession of my entire soul, like these sweets.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12"><a class="btn btn-primary" href="#">影像上傳</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="p-3 col-md-8">
+          <div class="blockquote mb-0">
+            <h1 class="display-4">辨識結果</h1>
+          </div>
+        </div>
+        <div class="col-md-2 mx-auto p-3"> <img class="img-fluid d-block rounded-circle" src="https://static.pingendo.com/img-placeholder-2.svg"> </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center d-md-flex align-items-center"> <i class="d-block fa fa-stop-circle fa-2x mr-md-5 text-primary"></i>
+          <ul class="nav mx-md-auto d-flex justify-content-center">
+            <li class="nav-item"> <a class="nav-link active" href="#">Home</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
+          </ul>
+          <div class="row">
+            <div class="col-md-12 d-flex align-items-center justify-content-md-between justify-content-center my-2"> <a href="#">
+                <i class="d-block fa fa-facebook-official text-muted fa-lg mx-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+              </a> <a href="#">
+                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+              </a> </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="mt-2 mb-0" style="">© Since 2021&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" style=""></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</body>
 
-<style>
-    .upload_zone {
-    width: auto;
-    height: 300px;
-    margin: 20px;
-    padding: 10px;
-    cursor: pointer;
-    background-color: aqua;
-}
-
-.upload_zone_enter {
-    border: 50px dashed black;
-    background-clip: content-box;
-}
-
-.obj {
-    width: 500px;
-    height: 500px;
-}
-
-.display_none {
-    display: none;
-}
-</style>
-<script>
-
-     const dropbox = document.getElementById("upload_zone");
-    const preview = document.getElementById("preview");
-
-    function handleFileSelect(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        const fileUploader = document.getElementById("fileUploader");
-        fileUploader.click();
-    }
-
-    const click = e => handleFileSelect(e);
-
-    // prevent the default method working
-    function dragenter(e) {
-        // add the styling to div
-        dropbox.classList.add("upload_zone_enter");
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-    const dragleave = () => dropbox.classList.remove("upload_zone_enter");
-
-    // prevent the default method working
-    function dragover(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-
-    function handleFiles(files) {
-        for (var i = 0; i < files.length; i++) {
-            const file = files[i];
-            const imageType = /image.*/;
-
-            if (!file.type.match(imageType)) {
-                continue;
-            }
-
-            const img = document.createElement("img");
-            img.classList.add("obj");
-            img.file = file;
-            preview.appendChild(img);
-
-            const reader = new FileReader();
-            reader.onload = (e => img.src = e.target.result);
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function drop(e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        const dt = e.dataTransfer;
-        const files = dt.files;
-
-        handleFiles(files);
-        dropbox.classList.remove("upload_zone_enter");
-    }
-
-    dropbox.addEventListener("click", click, false);
-    dropbox.addEventListener("dragenter", dragenter, false);
-    dropbox.addEventListener("dragleave", dragleave, false);
-    dropbox.addEventListener("dragover", dragover, false);
-    dropbox.addEventListener("drop", drop, false);
-</script>
 </html>

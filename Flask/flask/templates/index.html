@@ -1,39 +1,152 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<title>Page Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.83.1">
+  <title>登入</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="./static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .ff {
+      width: 300px;
+      height: 30px;
+      line-height: 30px;
+      margin: 0px auto;
+      text-align: center;
+      border: 0px dotted #ccc;
+    }
+  </style>
+  <script type="text/javascript">
+    let newTimer = () => {
+      let date = new Date();
+      let str = date.toLocaleDateString();
+      str += "  " + week();
+      str += "  " + date.toLocaleTimeString();
+      let odiv = document.getElementById("ant");
+      odiv.innerHTML = str;
+      setTimeout(newTimer, 1000);
+    }
+    let week = () => {
+      let d, day, x, s = " ";
+      x = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+      d = new Date();
+      day = d.getDay();
+      return (s += x[day]);
+    }
+
+    window.onload = () => {
+      newTimer();
+    }
+  </script>
+
 </head>
 
-
 <body>
-<img src="{{url_for('static',filename='ksu.jpg')}}" class="center">
-<h1>Kun Shan University</h1>
-<p>本系發展方向於100年時，配合雲端服務與智慧手機的興盛，修改為雲端智慧服務、行動智慧介面與嵌入式智慧終端開發等三大領域，配合規劃的發展方向整合教師專長再分工。自98學年度評鑑後以來，本系在爭取計畫、參加各項比賽、學生實習或考取證照上，都有長足的進步、倍數的成長，並於103年度教育部評鑑中獲得一等通過。目前資工系亦配合資訊領域的發展趨勢，在課程中、研究方向融入物聯網、大數據分析、人工智慧、資訊安全的元素，以建構更佳的教學研究環境，以培育優秀的未來資訊人才。
 
-    本系持續配合科技的進步，調整方向，尤其在面對少子化的趨勢，全系教師都有一致的共識，不斷在研究與技能上與時俱進，更在課程上不斷配合科技進步與產業趨勢調整，以期在各項績效上能不斷提升，累積本系招生知名度，以達永續經營之目標。</p>
+  <main>
 
-<link rel="stylesheet" type="text/css"
- href="{{url_for(filename='style.css')}}">
+    <div class="container py-4">
+      <header class="p-3 bg-white text-black">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap" />
+              </svg>
+            </a>
+            <a class="navbar-brand text-primary" href="#">
+              <b>CNN模型判別肺炎X光影像Web系統</b>
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            </ul>
+
+            <nav class="navbar navbar-light bg-light" aria-label="First navbar example">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
+                aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
 
-<div class="container">
- <div class="card">
-  <img src="{{url_for('static',filename='ksu2.jpg')}}" alt=""/>
-  <div class="info">
-      <form action="/ksu1" method="POST" target="_blank">
-      <button name="forwardBtn1" type="submit">View More</button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample01">
+
+            <ul class="navbar-nav me-auto mb-2">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                  aria-expanded="false">Dropdown</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </header>
+    </div>
+  </main>
+
+  <main class="form-signin">
+    <div class="ff">
+      <form action="login.php">
+        <img class="mb-4" src="/static/logo.png" alt="KSU logo" width="100" height="100">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="mb-3 form-floating">
+          <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Userid">
+          <label for="floatingInput">User id</label>
+        </div><br>
+        <div class="mb-5 form-floating">
+          <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
       </form>
-      <p>Hello Student</p>
-  </div>
-</div>
-
-<div class="card">
-   <img src="{{url_for('static',filename='ksu2.jpg')}}" alt=""/>
-     <div class="info">
-         <button>View More</button>
-         <p>Hello Student</p>
-     </div>
-   </div>
-
+      <div>
+        <button class="w-50 btn btn-lg btn-primary" type="submit" style="margin:15px">Log in</button>
+        <a href="/Sign_up" class="btn btn-lg btn-danger" type="submit" style="margin:15px">Sign up</a>
+        <br>
+        <br>
+        <br>
+        <div id="ant"></div>
+      </div>
+    </div>
+  </main>
+  <script src="static/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
