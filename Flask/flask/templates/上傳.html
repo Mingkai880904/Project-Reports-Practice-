@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- PAGE settings -->
   <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
-  <title>Product</title>
+  <title>辨識頁面</title>
   <meta name="description" content="Wireframe design of a product display by Pingendo">
   <meta name="keywords" content="Pingendo bootstrap example template wireframe product">
   <meta name="author" content="Pingendo">
@@ -30,19 +30,25 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar5">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank" title="崑山科技大學">崑山科技大學官網</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/"target="_blank" title="資訊工程系">關於資訊工程系</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank"
+              title="崑山科技大學">崑山科技大學官網</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
+              title="資訊工程系">關於資訊工程系</a> </li>
 
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Services</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
-        </ul> <a class="btn btn-outline-primary navbar-btn ml-md-2">Contact us</a>
+          <li class="nav-item"> <a class="nav-link" href="/aboutproject">作品介紹</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/aboutteam">小組介紹</a> </li>
+        <ul>  
+          <!-- <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
+        </ul>
+         <a class="btn btn-outline-primary navbar-btn ml-md-2">Contact us</a> -->
       </div>
     </div>
   </nav>
-  <img src="/static/logo-og.png" alt="KSU Logo" width="800" height="250">
+  <div>
+      <img src="/static/logo-og.png" alt="KSU Logo" width="400" height="150" style="display:block; margin:auto;"/>
+  </div>
   <div class="py-5">
     <marquee direction="right" height="50" width="2000">感謝所有防疫第一線的醫護人員，有你真好!!!!!!</marquee>
     <div class="container">
@@ -56,35 +62,38 @@
             <body>
               <form class="p-2 text" action="/web" , method="post" enctype="multipart/form-data">
                 <input type="file" id="fileUploader" onchange="handleFiles(this.files)" name="imagefile" />
+                <br>
                 <div id="upload_zone" class="upload_zone" type="files">
                   <h2>請點擊綠框將圖片上傳</h2>
                   <h2>注意:一次只放一張照片，否則會造成辨識失誤!!!</h2>
                 </div>
-                <div align="center" style="position:relative;top:10px">
-                  <input class="btn btn-primary" type="submit" value="執行">
-                  <!-- 透過跳頁的方式來重新載入 -->
-                  <a href="/web" class="btn btn-secondary" onclick="window.location.reload()">重試</a>
-                </div>
                 <br>
                 <div class="blockquote mb-0">
-                  <h1 class="display-4" float: left>辨識結果如下:</h1>
-                  <h1 class="display-4" float: left>model</h1>
+                  <h2 class="display-4" float: left>辨識結果如下:</h2>
+                  <h2 class="display-4" float: left>model</h2>
                   <div id="preview" name="imagefile"></div>
                   {% if prediction %}
                   <p class="text-center"> 辨識結果:{{prediction}}</p>
                   {% endif %}
-                  <br><br><br><br>
-                  <div align="center" style="position:relative">
-                    <input name="print" type="button" value="列印此頁" onClick="varitext()" class="print">
+                  <br><br>
+                  <div align="center" style="position:relative;top:10px">
+                    <input class="btn btn-primary" type="submit" value="執行">
+                    <!-- 透過跳頁的方式來重新載入 -->
+                    <a href="/web" class="btn btn-secondary" onclick="window.location.reload()">重試</a>
                   </div>
-                  <br>
-                  <div id="time" style="background-color:pink;"></div>
+                  <br><br>
               </form>
             </body>
           </div>
         </div>
+        <div>
+          <input name="print" type="button" value="列印此頁" onClick="varitext()" class="print" style="display:block;margin:auto;">
+        </div>
       </div>
     </div>
+   
+    <br>
+    <div id="time" style="background-color:pink;"></div>
     <div class="py-3">
       <div class="container">
         <div class="row">
@@ -127,15 +136,13 @@
 
     <style>
       .upload_zone {
-        width: 1000px;
+        width: 1200px;
         height: 100px;
-        margin: 20px;
+        margin: 10px;
         padding: 10px;
         cursor: pointer;
         background-color: rgb(47, 148, 47);
       }
-
-
 
       .obj {
         width: 300px;
@@ -154,13 +161,14 @@
       }
 
       .time {
-        width: 300px;
-        height: 50px;
+        width: 1200px;
+        height: 100px;
         line-height: 60px;
         margin: 0px auto;
         text-align: center;
         border: 1px dotted #ccc;
       }
+
     </style>
     <script>
 

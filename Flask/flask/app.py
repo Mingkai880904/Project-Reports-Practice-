@@ -24,6 +24,14 @@ def signup():
 def web():
         return render_template('上傳.html')
 
+@app.route('/aboutteam', methods=['GET'])
+def team():
+        return render_template('aboutteam.html')
+
+
+@app.route('/aboutproject', methods=['GET'])
+def project():
+        return render_template('aboutproject.html')
 
 
 @app.route('/web', methods=['POST'])
