@@ -111,7 +111,7 @@
 
   <main class="form-signin">
     <div class="ff">
-      <form action="login.php">
+      <!-- <form action="login.php">
         <img class="mb-4" src="/static/logo.png" alt="KSU logo" width="100" height="100">
         <h1 class="h3 mb-3 fw-normal">歡迎使用</h1>
 
@@ -123,9 +123,16 @@
           <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
           <label for="floatingPassword">Password</label>
         </div>
+      </form> -->
+      <form action="/web" method="post">
+        <h1>歡迎登入</h1><b>帳號:</b><br>
+        <input type="text" name='username'><br>
+        <b>密碼:</b><br>
+        <input  name='password' ><br><br>
+      <input type="submit" value="登入" class="w-50 btn btn-lg btn-primary"style="margin:5px">
       </form>
       <div align="center" style="position:relative;top:10px">
-        <button class="w-50 btn btn-lg btn-primary" type="submit" style="margin:5px">登入</button>
+        <!-- <button class="w-50 btn btn-lg btn-primary" type="submit" style="margin:5px">登入</button> -->
         <a href="/Sign_up" class="btn btn-lg btn-danger" type="submit" style="margin:5px">使用者帳號建立</a>
         <br>
         <br>

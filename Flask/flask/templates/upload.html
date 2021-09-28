@@ -6,101 +6,236 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- PAGE settings -->
   <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
-  <title>Product</title>
+  <title>辨識頁面</title>
   <meta name="description" content="Wireframe design of a product display by Pingendo">
   <meta name="keywords" content="Pingendo bootstrap example template wireframe product">
   <meta name="author" content="Pingendo">
   <!-- CSS dependencies -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="wireframe.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    type="text/css">
+  <link rel="stylesheet" href="{{url_for('static',filename='wireframe.css')}}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <body>
   <footer></footer>
   <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container"> <a class="navbar-brand text-primary" href="#">
-        <i class="fa d-inline fa-lg fa-circle-o"></i>
-        <b> BRAND</b>
-      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar5">
+    <div class="container"> <a class="navbar-brand text-primary" href="/">
+        <b>CNN模型判別肺炎
+          X光影像 Web系統</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbar5">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar5">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Product</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank"
+              title="崑山科技大學">崑山科技大學官網</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
+              title="資訊工程系">關於資訊工程系</a> </li>
+
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Services</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
-        </ul> <a class="btn btn-outline-primary navbar-btn ml-md-2">Contact us</a>
+          <li class="nav-item"> <a class="nav-link" href="/aboutproject">作品介紹</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/aboutteam">小組介紹</a> </li>
+        <ul>  
+          <!-- <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
+        </ul>
+         <a class="btn btn-outline-primary navbar-btn ml-md-2">Contact us</a> -->
       </div>
     </div>
   </nav>
+  <div>
+      <img src="/static/logo-og.png" alt="KSU Logo" width="400" height="150" style="display:block; margin:auto;"/>
+  </div>
   <div class="py-5">
+    <marquee direction="right" height="50" width="2000">感謝所有防疫第一線的醫護人員，有你真好!!!!!!</marquee>
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 order-2 order-lg-1"> <img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-tablet.svg"> </div>
-        <div class="px-md-5 p-3 col-lg-6 d-flex flex-column align-items-start justify-content-center order-1 order-lg-2">
-          <h1 class="display-4" contenteditable="true" style="">醫師您好，歡迎登入</h1>
-          <div class="row">
-            <div class="col-6 col-md-12">
-              <h5>請點選"影像上傳"按鈕上傳X光檔案</h5>
-              <p>A wonderful serenity has taken possession of my entire soul, like these sweets.</p>
+        <div
+          class="px-md-5 p-3 col-lg-6 d-flex flex-column align-items-start justify-content-center order-1 order-lg-2">
+          <!-- 跑馬燈 -->
+          <div>
+            <h1 class="display-4" float: left>醫師您好，歡迎登入</h1><br>
+
+            <body>
+              <form class="p-2 text" action="/web" , method="post" enctype="multipart/form-data">
+                <input type="file" id="fileUploader" onchange="handleFiles(this.files)" name="imagefile" />
+                <br>
+                <div id="upload_zone" class="upload_zone" type="files">
+                  <h2>請點擊綠框將圖片上傳</h2>
+                  <h2>注意:一次只放一張照片，否則會造成辨識失誤!!!</h2>
+                </div>
+                <br>
+                <div class="blockquote mb-0">
+                  <h2 class="display-4" float: left>辨識結果如下:</h2>
+                  <h2 class="display-4" float: left>model</h2>
+                  <div id="preview" name="imagefile"></div>
+                  {% if prediction %}
+                  <p class="text-center"> 辨識結果:{{prediction}}</p>
+                  {% endif %}
+                  <br><br>
+                  <div align="center" style="position:relative;top:10px">
+                    <input class="btn btn-primary" type="submit" value="執行">
+                    <!-- 透過跳頁的方式來重新載入 -->
+                    <a href="/web" class="btn btn-secondary" onclick="window.location.reload()">重試</a>
+                  </div>
+                  <br><br>
+              </form>
+            </body>
+          </div>
+        </div>
+        <div>
+          <input name="print" type="button" value="列印此頁" onClick="varitext()" class="print" style="display:block;margin:auto;">
+        </div>
+      </div>
+    </div>
+   
+    <br>
+    <div id="time" style="background-color:pink;"></div>
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center d-md-flex align-items-center"> <i
+              class="d-block fa fa-stop-circle fa-2x mr-md-5 text-primary"></i>
+            <ul class="nav mx-md-auto d-flex justify-content-center">
+              <li class="nav-item"> <a class="nav-link active" href="#">Home</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
+            </ul>
+            <div class="row">
+              <div class="col-md-12 d-flex align-items-center justify-content-md-between justify-content-center my-2">
+                <a href="#">
+                  <i class="d-block fa fa-facebook-official text-muted fa-lg mx-2"></i>
+                </a> <a href="#">
+                  <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
+                </a> <a href="#">
+                  <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
+                </a>
+              </div>
             </div>
+
           </div>
-          <div class="row">
-            <div class="col-md-12"><a class="btn btn-primary" href="#">影像上傳</a></div>
-          </div>
+        </div>
+        <div class="row">
         </div>
       </div>
     </div>
-  </div>
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="p-3 col-md-8">
-          <div class="blockquote mb-0">
-            <h1 class="display-4">辨識結果</h1>
-          </div>
-        </div>
-        <div class="col-md-2 mx-auto p-3"> <img class="img-fluid d-block rounded-circle" src="https://static.pingendo.com/img-placeholder-2.svg"> </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center d-md-flex align-items-center"> <i class="d-block fa fa-stop-circle fa-2x mr-md-5 text-primary"></i>
-          <ul class="nav mx-md-auto d-flex justify-content-center">
-            <li class="nav-item"> <a class="nav-link active" href="#">Home</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
-          </ul>
-          <div class="row">
-            <div class="col-md-12 d-flex align-items-center justify-content-md-between justify-content-center my-2"> <a href="#">
-                <i class="d-block fa fa-facebook-official text-muted fa-lg mx-2"></i>
-              </a> <a href="#">
-                <i class="d-block fa fa-instagram text-muted fa-lg mx-2"></i>
-              </a> <a href="#">
-                <i class="d-block fa fa-twitter text-muted fa-lg ml-2"></i>
-              </a> </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <p class="mt-2 mb-0" style="">© Since 2021&nbsp;</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" style=""></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+
+
+    <style>
+      .upload_zone {
+        width: 1200px;
+        height: 100px;
+        margin: 10px;
+        padding: 10px;
+        cursor: pointer;
+        background-color: rgb(47, 148, 47);
+      }
+
+      .obj {
+        width: 300px;
+        height: 300px;
+      }
+
+      .display_none {
+        display: none;
+      }
+
+      .print {
+        position: absolute;
+        left: 50%;
+        transform: translate(100%, -50%);
+        /* 3.使用translate讓元素移動自身的(X:100%,Y:-50%)距離 */
+      }
+
+      .time {
+        width: 1200px;
+        height: 100px;
+        line-height: 60px;
+        margin: 0px auto;
+        text-align: center;
+        border: 1px dotted #ccc;
+      }
+
+    </style>
+    <script>
+
+      const dropbox = document.getElementById("upload_zone");
+      const preview = document.getElementById("preview");
+
+      function handleFileSelect(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const fileUploader = document.getElementById("fileUploader");
+        fileUploader.click();
+      }
+
+      const click = e => handleFileSelect(e);
+
+      // prevent the default method working
+
+      function handleFiles(files) {
+        for (var i = 0; i < files.length; i++) {
+          const file = files[i];
+          const imageType = /image.*/;
+
+          if (!file.type.match(imageType)) {
+            continue;
+          }
+
+          const img = document.createElement("img");
+          img.classList.add("obj");
+          img.file = file;
+          preview.appendChild(img);
+
+          const reader = new FileReader();
+          reader.onload = (e => img.src = e.target.result);
+          reader.readAsDataURL(file);
+
+        }
+      }
+      dropbox.addEventListener("click", click, false);
+
+      function varitext() {
+        var text = document
+        print(text)
+      }
+
+      //-------------時間-------------
+      let newTimer = () => {
+        let date = new Date();
+        let str = date.toLocaleDateString();
+        str += "  " + week();
+        str += "  " + date.toLocaleTimeString();
+        let odiv = document.getElementById("time");
+        odiv.innerHTML = str;
+        setTimeout(newTimer, 1000);
+      }
+      let week = () => {
+        let d, day, x, s = " ";
+        x = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        d = new Date();
+        day = d.getDay();
+        return (s += x[day]);
+      }
+
+      window.onload = () => {
+        newTimer();
+      }
+    </script>
+
 </body>
 
 </html>
