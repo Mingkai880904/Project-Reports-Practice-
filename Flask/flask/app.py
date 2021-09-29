@@ -16,7 +16,7 @@ def hello_world():
     return render_template("index.html")
 database={'admin':'123','ksu':'ksu','cnn':'cnn'}
 
-@app.route('/web',methods=['POST','GET'])
+@app.route('/login',methods=['POST','GET'])
 def login():
     name1=request.form['username']
     pwd=request.form['password']
