@@ -14,7 +14,7 @@ from keras.preprocessing import image
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
-#from gevent.pywsgi import WSGIServer
+# from gevent.pywsgi import WSGIServer
 
 # Define a flask app
 app = Flask(__name__)
@@ -35,6 +35,29 @@ model.make_predict_function()          # Necessary
 # model = VGG16(weights='imagenet')
 # model.save('')
 # print('Model loaded. Check http://127.0.0.1:5000/')
+@app.route('/', methods=['GET'])
+def index():
+    # Main page
+    return render_template('login.html')
+
+database = {'admin': '123', 'ksu': 'ksu', 'cnn': 'cnn'}
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    name1 = request.form['username']
+    pwd = request.form['password']
+    if name1 not in database:
+	    return render_template('login.html', info='Invalid User')
+    else:
+        if database[name1] != pwd:
+            return render_template('login.html', info='Invalid Password')
+        else:
+	         return render_template('index.html', name=name1)
+
+
+
+
 
 
 def model_predict(img_path, model):
@@ -53,10 +76,6 @@ def model_predict(img_path, model):
     return preds
 
 
-@app.route('/', methods=['GET'])
-def index():
-    # Main page
-    return render_template('index.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
