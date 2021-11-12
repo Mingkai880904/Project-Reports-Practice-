@@ -1,0 +1,4 @@
+Werkzeug>=0.15.3
+gevent==1.2.2
+h5py==2.7.0
+gunicorn==>=19.5.0
