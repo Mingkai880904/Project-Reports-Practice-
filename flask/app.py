@@ -1,18 +1,33 @@
+from __future__ import division, print_function
 from re import A
 from flask import Flask, render_template, request
-from h5py._hl import files
-from numpy.lib.npyio import load
-from tensorflow.python.keras.backend import get_value
+import numpy as np
+import os
+import cv2
+
+
+# Keras
+from keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from keras.models import load_model
+from keras.preprocessing import image
+
+from werkzeug.utils import secure_filename
+
+
 app = Flask(__name__)
 
+# Model saved with Keras model.save()
+# MODEL_PATH = 'models/pneumonia_cnn1011.h5'
+MODEL_PATH = 'models/trained_model.h5'
+
+# Load your trained model
+model = load_model(MODEL_PATH)
+model.make_predict_function() 
 
 
 
 
-import tensorflow.keras
-from PIL import Image, ImageOps
-import numpy as np
-from keras.preprocessing.image import load_img
+
 @app.route('/')
 def hello_world():
     return render_template("index.html")
@@ -34,8 +49,7 @@ def login():
 	         return render_template('upload.html', name=name1)
 
 
-if __name__ == '__main__':
-    app.run()
+
 
 # @app.route('/')
 # def index():
@@ -61,40 +75,99 @@ def project():
         return render_template('aboutproject.html')
 
 
+# def model_predict(img_path, model):
+#     img = image.load_img(img_path, target_size=(224, 224), grayscale=True)
 
-@app.route('/web', methods=['GET','POST'])
-def web2():
-    imagefile = request.files['imagefile']
-    image_path = "./images/" + imagefile.filename
-    imagefile.save(image_path)
-    model = tensorflow.keras.models.load_model('pneumonia_cnn0927.h5', compile=False)
-    data = np.ndarray(shape=(1, 200, 200,1), dtype=np.float32)
-    # Replace this with the path to your image
-    image = load_img(image_path,target_size=(200,200))
-    #resize the image to a 224x224 with the same strategy as in TM2:
-    #resizing the image to be at least 224x224 and then cropping from the center
-    size = (200, 200)
-    image = ImageOps.fit(image, size)
-    image = ImageOps.fit(image, size, Image.ANTIALIAS)
-    #turn the image into a numpy array
-    image_array = np.asarray(image)
-    # display the resized image
-    # image.show()
-    # Normalize the image
-    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-    # Load the image into the array
-    data[0] = normalized_image_array
-    # run the inference
-    prediction = model.predict(data)
-    if(prediction[0][0]>prediction[0][1]):
-        a=("正常",prediction[0][0])
-        print(a)
-    else:
-        a = ("肺炎",prediction[0][1])
-        print(a)
-    response = a
-    return render_template('upload.html',prediction = response)
+#     # Preprocessing the image
+#     x = image.img_to_array(img)
+#     x = np.true_divide(x, 255)
+#     x = np.expand_dims(x, axis=0)
+
+#     # Be careful how your trained model deals with the input
+#     # otherwise, it won't make correct prediction!
+#     # x = preprocess_input(x, mode='caffe')
+
+#     preds = model.predict(x)
+#     return preds
+def model_predict(img_path, model):
+    img = image.load_img(img_path, target_size=(64, 64)) #target_size must agree with what the trained model expects!!
+
+    # Preprocessing the image
+    img = image.img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+
+   
+    preds = model.predict(img)
+    return preds
+
+
+
+# @app.route('/predict', methods=['GET', 'POST'])
+# def upload():
+#     if request.method == 'POST':
+#         # Get the file from post request
+#         f = request.files['file']
+
+#         # Save the file to ./uploads
+#         basepath = os.path.dirname(__file__)
+#         file_path = os.path.join(
+#             basepath, 'uploads', secure_filename(f.filename))
+#         f.save(file_path)
+
+#         # Make prediction
+#         preds = model_predict(file_path, model)
+
+#         # Process your result for human
+#         pred_class = preds.argmax(axis=-1)            # Simple argmax
+#         # pred_class = decode_predictions(preds, top=1)   # ImageNet Decode
+#         # result = str(pred_class[0][0][1])               # Convert to string
+        
+#         # result = str(preds)
+
+#         result = str(np.max(preds))
+
+#         answer=["細菌感染","正常","病毒"]
+
+#         if(result==str(preds[0][0])):
+#            print(answer[0])
+#            result = answer[0]
+#         elif(result==str(preds[0][1])):
+#            print(answer[1])
+#            result = answer[1]
+#         elif(result==str(preds[0][2])):
+#            print(answer[2])
+#            result = answer[2]
+#         return result
+#     return None
+
+@app.route('/predict', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # Get the file from post request
+        f = request.files['file']
+
+        # Save the file to ./uploads
+        basepath = os.path.dirname(__file__)
+        file_path = os.path.join(
+            basepath, 'uploads', secure_filename(f.filename))
+        f.save(file_path)
+
+        # Make prediction
+        preds = model_predict(file_path, model)
+        os.remove(file_path)#removes file from the server after prediction has been returned
+
+        # Arrange the correct return according to the model. 
+		# In this model 1 is Pneumonia and 0 is Normal.
+        str1 = 'Pneumonia'
+        str2 = 'Normal'
+        if preds == 1:
+            return str1
+        else:
+            return str2
+    return None
+
+
 
 
 if __name__ == '__main__':
-   app.run(debug = True)
+    app.run(debug=True)
