@@ -18,7 +18,8 @@ app = Flask(__name__)
 
 # Model saved with Keras model.save()
 # MODEL_PATH = 'models/pneumonia_cnn1011.h5'
-MODEL_PATH = 'models/trained_model.h5'
+# MODEL_PATH = 'models/trained_model.h5'
+MODEL_PATH = 'models/trained_1114.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
@@ -90,8 +91,8 @@ def project():
 #     preds = model.predict(x)
 #     return preds
 def model_predict(img_path, model):
-    img = image.load_img(img_path, target_size=(64, 64)) #target_size must agree with what the trained model expects!!
-
+    # img = image.load_img(img_path, target_size=(64, 64)) #trained_model.h5
+    img = image.load_img(img_path, target_size=(300, 300)) #trained_1114.h5
     # Preprocessing the image
     img = image.img_to_array(img)
     img = np.expand_dims(img, axis=0)
