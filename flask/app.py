@@ -4,6 +4,16 @@ from flask import Flask, render_template, request
 import numpy as np
 import os
 import cv2
+import time
+from datetime import datetime
+
+
+
+from db import db_init, db
+from models import Img
+
+
+
 
 
 # Keras
@@ -13,8 +23,16 @@ from keras.preprocessing import image
 
 from werkzeug.utils import secure_filename
 
-
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///img.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db_init(app)
+
+
+
+
+
+
 
 # Model saved with Keras model.save()
 # MODEL_PATH = 'models/pneumonia_cnn1011.h5'
@@ -159,13 +177,67 @@ def upload():
 
         # Arrange the correct return according to the model. 
 		# In this model 1 is Pneumonia and 0 is Normal.
-        str1 = 'Pneumonia'
+        str1 = 'Pneumonia，請至胸腔內科治療'
         str2 = 'Normal'
         if preds == 1:
             return str1
         else:
             return str2
     return None
+
+
+@app.route('/select', methods=['GET'])
+def select():
+        return render_template('table.html')
+
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload2():
+	if request.method == "POST":
+		pic = request.files['pic']
+		if not pic:
+			return 'No pic uploaded!', 400
+		filename = secure_filename(pic.filename)
+		mimetype = pic.mimetype
+		if not filename or not mimetype:
+			return 'Bad upload!', 400
+		#parameter  = request.form['input name']
+		name = request.form['patient_name']
+		birthday = request.form['birthday']
+		print(name)
+		print(birthday)
+		img = Img(img=pic.read(), name=name, mimetype=mimetype, birthday=birthday)
+		db.session.add(img)
+		db.session.commit()
+	return render_template("upload2.html")
+
+
+
+@app.route("/query", methods=["GET", "POST"])
+def query():	
+	if request.method == "POST":
+		
+		name = request.form['patient_name']
+		img = Img.query.filter_by(name = name).first()
+		#有這位病患
+		try:
+			image = img.img
+			# print(img.img)
+		except:
+		#病患不存在 傳回錯誤
+			image= None
+			return 'Patient  Not Found!', 40
+		#讀取byte64結構，存成圖片並傳入地址
+		nparr = np.fromstring(img.img, np.uint8)
+		image = cv2.imdecode(nparr, cv2.IMREAD_ANYCOLOR)
+		now = datetime.now().timestamp()
+		cv2.imwrite('./static/displayDB/temp'+str(now)+'.png', image)
+		time.sleep(2)
+		# print(image='temp.png', name=img.name, birthday=img.birthday)
+		return render_template("query.html", image='temp'+str(now)+'.png', name=img.name, birthday=img.birthday)
+	return render_template("query.html", image= None )
+
 
 
 
