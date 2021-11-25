@@ -24,6 +24,7 @@
 </head>
 
 <body>
+  {% block navbar %}
   <footer></footer>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container"> <a class="navbar-brand text-primary" href="/">
@@ -39,7 +40,8 @@
               title="崑山科技大學">崑山科技大學官網</a> </li>
           <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
               title="資訊工程系">關於資訊工程系</a> </li>
-
+          <li class="nav-item"><a class="nav-link" href="/upload">上傳</a></li>
+		      <li class="nav-item"><a class="nav-link" href="/query">查詢</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"> <a class="nav-link" href="/aboutproject">作品介紹</a> </li>
@@ -51,6 +53,8 @@
       </div>
     </div>
   </nav>
+  {% endblock %}
+
   <div>
     <img src="/static/logo-og.png" alt="KSU Logo" width="400" height="150" style="display:block; margin:auto;" />
   </div>
