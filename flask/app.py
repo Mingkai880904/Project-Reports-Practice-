@@ -186,11 +186,6 @@ def upload():
     return None
 
 
-@app.route('/select', methods=['GET'])
-def select():
-        return render_template('table.html')
-
-
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload2():
@@ -220,6 +215,8 @@ def query():
 		
 		name = request.form['patient_name']
 		img = Img.query.filter_by(name = name).first()
+		# img = Img.query.filter(name==name).all()
+
 		#有這位病患
 		try:
 			image = img.img
@@ -227,7 +224,7 @@ def query():
 		except:
 		#病患不存在 傳回錯誤
 			image= None
-			return 'Patient  Not Found!', 40
+			return '查詢不到此資料'
 		#讀取byte64結構，存成圖片並傳入地址
 		nparr = np.fromstring(img.img, np.uint8)
 		image = cv2.imdecode(nparr, cv2.IMREAD_ANYCOLOR)
@@ -239,6 +236,31 @@ def query():
 	return render_template("query.html", image= None )
 
 
+@app.route("/delete", methods=["GET", "POST"])
+def delete():	
+	if request.method == "POST":
+	
+		name = request.form['patient_name']
+		img = Img.query.filter_by(name = name).first()
+		if img== None:
+			return '未查詢到欲刪除資料!'
+		db.session.delete(img)
+		db.session.commit()
+	return render_template("delete.html")
+#先查詢，再刪除
+
+
+@app.route("/update", methods=["GET", "POST"])
+def update():	
+	if request.method == "POST":
+	
+		name = request.form['patient_name']
+		update_name =request.form['update_name']
+		img = Img.query.filter_by(name=name).first()
+		img.name = update_name
+		db.session.commit()
+	return render_template("update.html")
+#先查詢，再更新
 
 
 
