@@ -43,6 +43,8 @@
      <li class="nav-item"><a class="nav-link" href="/upload">上傳</a></li>
        <li class="nav-item"><a class="nav-link" href="/query">查詢</a></li>
        <li class="nav-item"><a class="nav-link" href="/delete">刪除</a></li>
+       <li class="nav-item"><a class="nav-link" href="/update">修改</a></li>   
+
    </ul>
    <ul class="navbar-nav ml-auto">
      <li class="nav-item"> <a class="nav-link" href="/aboutproject">作品介紹</a> </li>
@@ -67,13 +69,14 @@
      <br>
      <br> 
      <form method=post enctype="multipart/form-data">
-       <h1>辨識紀錄查詢</h1>
+       <h1>辨識紀錄修改</h1>
        <br>
        <br>
        <br>
        <h2>請輸入醫師代號</h2>
-      	<input type= "text" name ="patient_name" placeholder="請輸入代號"> 
-      <button type="submit" class="btn btn-info">查詢</button>
+      	<input type= "text" name ="patient_name" placeholder="請輸入代號"> <br>
+        <input type= "text" name ="update_name" placeholder="請輸入更改代號"> 
+      <button type="submit" class="btn btn-warning">修改</button>
       <br>
       {% if image %}
         <img  src="static/displayDB/{{image}}"   width="250" height="250">
