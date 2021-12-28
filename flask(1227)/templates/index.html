@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.83.1">
+  <title>登入</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="./static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .ff {
+      width: 300px;
+      height: 30px;
+      line-height: 30px;
+      margin: 0px auto;
+      text-align: center;
+      border: 0px dotted #ccc;
+    }
+  </style>
+  <script type="text/javascript">
+    let newTimer = () => {
+      let date = new Date();
+      let str = date.toLocaleDateString();
+      str += "  " + week();
+      str += "  " + date.toLocaleTimeString();
+      let odiv = document.getElementById("ant");
+      odiv.innerHTML = str;
+      setTimeout(newTimer, 1000);
+    }
+    let week = () => {
+      let d, day, x, s = " ";
+      x = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+      d = new Date();
+      day = d.getDay();
+      return (s += x[day]);
+    }
+
+    window.onload = () => {
+      newTimer();
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <main>
+
+    <div class="container py-4">
+      <header class="p-3 bg-white text-black">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                <use xlink:href="#bootstrap" />
+              </svg>
+            </a>
+            <a class="navbar-brand text-primary" href="#">
+              <b>CNN模型判別肺炎X光影像Web系統</b>
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            </ul>
+
+            <nav class="navbar navbar-light bg-light" aria-label="First navbar example">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01"
+                aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample01">
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank"
+                title="崑山科技大學">崑山科技大學官網</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
+                title="資訊工程系">關於資訊工程系</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="/aboutproject">作品介紹</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="/aboutteam">小組介紹</a> </li>
+            <ul>  
+
+          </div>
+        </div>
+      </header>
+    </div>
+  </main>
+
+  <main class="form-signin">
+    <div class="ff">
+      <!-- <form action="login.php">
+        <img class="mb-4" src="/static/logo.png" alt="KSU logo" width="100" height="100">
+        <h1 class="h3 mb-3 fw-normal">歡迎使用</h1>
+
+        <div class="mb-3 form-floating">
+          <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Userid">
+          <label for="floatingInput">User id</label>
+        </div><br>
+        <div class="mb-5 form-floating">
+          <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+      </form> -->
+      <form action="/login" method="post">
+        <h1>歡迎登入</h1><b>帳號:</b><br>
+        <input type="text" name='username'><br>
+        <b>密碼:</b><br>
+        <input  name='password' ><br><br>
+      <input type="submit" value="登入" class="w-50 btn btn-lg btn-primary"style="margin:5px">
+      </form>
+      <div align="center" style="position:relative;top:10px">
+        <!-- <button class="w-50 btn btn-lg btn-primary" type="submit" style="margin:5px">登入</button> -->
+        <a href="/Sign_up" class="btn btn-lg btn-danger" type="submit" style="margin:5px">使用者帳號建立</a>
+        <br>
+        <br>
+        <br>
+        <div id="ant"></div>
+      </div>
+    </div>
+  </main>
+  <script src="static/assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

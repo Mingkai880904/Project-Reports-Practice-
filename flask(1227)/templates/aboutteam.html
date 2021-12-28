@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>小組介紹</title>
+  <meta name="description" content="Wireframe design of a product display by Pingendo">
+  <meta name="keywords" content="Pingendo bootstrap example template wireframe product">
+  <meta name="author" content="Pingendo">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="wireframe.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>Product</title>
+  <meta name="description" content="Wireframe design of a product display by Pingendo">
+  <meta name="keywords" content="Pingendo bootstrap example template wireframe product">
+  <meta name="author" content="Pingendo">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="{{url_for('static',filename='wireframe.css')}}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+
+<body>
+  <footer></footer>
+  {% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div>
+      <img src="/static/logo-og.png" alt="KSU Logo" height="100px" style="display:block; margin:auto;" />
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar5">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/home">上傳</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/query">查詢</a></li>
+        <!-- <li class="nav-item"><a class="btn btn-outline-primary" href="/delete">刪除</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/update">修改</a></li>    -->
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank"
+          title="崑山科技大學">KSU</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
+          title="資訊工程系">CSIE</a> </li>
+        <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutproject">作品介紹</a> </li>
+        <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutteam">小組介紹</a> </li>
+      <ul>
+    </div>
+    <div class="container"> 
+
+      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbar5">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  {% endblock %}
+
+  <div>
+  </div>
+  <div class="py-5 text-center shadow-sm">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto col-md-12">
+          <h1 class="mb-3 bg-success w-100">專題研發小組</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-lg-4 p-4" style="	box-shadow: 0px 0px 4px  black;">
+          <h4> <b>蘇宇祥</b></h4>
+          <p class="mb-3">組長/醫學影像辨識訓練模型(CNN)</p>
+          <p class="mb-0">本作品 CNN模型判別肺炎 X光影像Web系統 ，作品初期先將肺部 X光分為 「 罹患肺炎 」 與 「 正常肺部 」 兩種類別，採用 CNN(Convolutional Neural Network, 卷積神經網路 )模型 中的類神經網路演算法 (Artificial neural network)進行模型訓練，使模型 建立能夠推理產生一個可以自動辨識的系統 與之不 同的基於符號系統下的學習方法，具有推理功能 。</p>
+        </div>
+        <div class="col-6 col-lg-4 p-4" style="	box-shadow: 0px 0px 4px  black;">
+          <h4> <b>陳冠喨</b></h4>
+          <p class="mb-3">組員/使用者Web介面(Front-end)</p>
+          <p class="mb-0">前端是 一套系統介面，讓特定醫師可使用自己的帳號密碼登入後，只要將肺部 X光 影像檔案選擇，按下執行按鈕後，系統經由運算後顯示肺炎罹患結果 ，供特定醫師查看，並採取後續處理動作。</p>
+        </div>
+        <div class="col-6 col-lg-4 p-4" style="	box-shadow: 0px 0px 4px  black;">
+          <h4> <b>沈明楷</b></h4>
+          <p class="mb-3">組員/網頁伺服(Web Server)</p>
+          <p class="mb-0"> 模型建立後， 開始處理後端會使用到的 Web Server程式，此 Web Server主要用來將特定醫師上傳之圖片 與 模型進行比對 。 將影像傳送到已訓練完成的醫學影 像辨識訓練模型進行辨識，並回傳辨識結果給前端，提供給使用者觀看辨識的結果 。&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="p-3 col-md-8">
+          <div class="blockquote mb-0">
+            <p><br></p>
+            <p>Life is like riding a bicycle. To keep your balance, you must keep moving.&nbsp;<br>人生就像騎腳踏車，為了保持平衡，你必須一直前進。</p>
+            <div class="blockquote-footer" contenteditable="true">
+              <b>Albert Einstein&nbsp;</b>愛因斯坦</div>
+          </div>
+        </div>
+        <div class="col-md-2 mx-auto p-3"> <img class="img-fluid d-block rounded-circle" src="/static/Data Arranging_Monochromatic.png"> </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
