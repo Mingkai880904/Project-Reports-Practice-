@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>COVID 19 </title >
+    </head>
+    
+<body>
+	{% block navbar %}
+	<style>
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		background-color: rgb(94, 174, 228);
+		position: fixed;
+		width:100%;
+	}
+	
+	ul li{float: left;}
+	ul li a{
+		display: block;
+		color: rgb(244, 246, 247);
+		padding: 8px 16px;
+		text-align: center;
+		text-decoration: none;
+	}
+	
+	ul li a.active{
+		color: lavender;
+		background-color: rgb(31, 51, 228);
+	}
+	
+	ul li a:hover:not(.active)
+	{
+		background-color: rgb(19, 227, 235);
+		color: white;
+	}
+	</style>
+	<ul >
+		<!-- <li><a href="../" class="active">首頁</a></li> -->
+		<!-- <li><a href="../predict">檢測</a></li> -->
+		<li><a href="../upload">上傳</a></li>
+		<li><a href="../query">查詢</a></li>
+	</ul>
+	{% endblock %}
+	{% block content %}
+        {% endblock %}
+</body>
+</html>
