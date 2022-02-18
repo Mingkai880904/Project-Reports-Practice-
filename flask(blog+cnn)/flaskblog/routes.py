@@ -60,13 +60,10 @@ def update2():
     if request.method == "POST":
         input2 = request.form['input_id']
         img = Img.query.filter_by(id=input2).first()
-        print(img)
-        # update_name = request.form['update_pa']
-        # update_datetime = request.form['update_date']
-        # img.name = update_name
-        # img.datetime = update_datetime
-        # db.session.commit()
-        return render_template("update.html", id=img.id,name=img.name,pa_name=img.pa_name,datetime=img.datetime,answer=img.answer)
+        if img == None:
+            flash('查無此資料', 'danger')
+        else:   
+            return render_template("update.html", id=img.id,name=img.name,pa_name=img.pa_name,datetime=img.datetime,answer=img.answer)
     return render_template('update.html', title='Update2')
 
 
@@ -154,13 +151,15 @@ def query():
 @app.route("/delete", methods=['GET', 'POST'])
 def delete():
     if request.method == "POST":
-
         id = request.form['patient_name']
         img = Img.query.filter_by(id=id).first()
         if img == None:
-            return '未查詢到欲刪除資料!'
-        db.session.delete(img)
-        db.session.commit()
+            str4 = 'Sorry,查詢不到該筆紀錄'#當沒有搜尋到指定id，顯示str4文字(查詢不到)
+            return render_template("delete.html",no_data_id=str4)
+        else:    
+            db.session.delete(img)
+            db.session.commit()
+            flash('該筆紀錄已刪除!!', 'success')
     return render_template("delete.html")
 # 先查詢，再刪除
 
