@@ -21,9 +21,9 @@
 
 <body>
   <header class="site-header">
-    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-custom bg-steel fixed-top">
       <div class="container">
-        <a class="navbar-brand mr-4" href="/">CNN模型判別肺炎X光影像Web系統</a>
+        <a class="navbar-brand mr-4" href="/"><b>CNN模型判別肺炎X光影像Web系統</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -95,7 +95,13 @@
       </div>
     </div>
   </main>
-
+  <br><br><br><br><br>
+  <div class="wrapper">
+    <div class="content">
+      <div id="time" style="background-color:rgb(192, 248, 255);"></div>
+    </div>
+  </div>
+  <footer class="footer"></footer>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -108,5 +114,45 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 </body>
+
+
+<script>
+
+  //-------------時間-------------
+  let newTimer = () => {
+    let date = new Date();
+    let str = date.toLocaleDateString();
+    str += "  " + week();
+    str += "  " + date.toLocaleTimeString();
+    let odiv = document.getElementById("time");
+    odiv.innerHTML = str;
+    setTimeout(newTimer, 1000);
+  }
+  let week = () => {
+    let d, day, x, s = " ";
+    x = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    d = new Date();
+    day = d.getDay();
+    return (s += x[day]);
+  }
+
+  window.onload = () => {
+    newTimer();
+  }
+</script>
+
+
+<style>
+.navbar-custom {
+    background-color: #191970;
+}
+#time {
+      width: 1100px;
+      height: 30px;
+      margin: 0px auto;
+      text-align: center;
+      border: 0px dotted #ccc;
+    }
+</style>
 
 </html>

@@ -47,14 +47,15 @@
   <br>
   <h2 class="text-center">點擊查詢按鈕以繼續</h2>
   <div class="text-center">
-    <input type="text" name="patient_name" value="{{current_user.username}}" readonly=readonly>
+    <input type="text" name="id" value="{{current_user.username}}" readonly=readonly>
     <button type="submit" class="btn btn-info">查詢</button>
   </div>
 
   <br>
+  <h3><b>{{no_data}}</b></h3>
   {% for img in to_quest %}
   <div class="text-left">
-    <img src="data:;base64,{{img.img}}" width="250" height="250" >
+    <img src="data:image/jpg;base64,{{img.img}}" width="250" height="250" >
     <!-- <input type="text" id="myText" value="{{img.name}}">
     <input type="text" id="myText" value="{{img.pa_name}}"> -->
 
