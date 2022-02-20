@@ -1,5 +1,6 @@
 import os
 import secrets
+from unicodedata import name
 import numpy as np
 
 from PIL import Image
@@ -59,7 +60,7 @@ def about():
 def update2():
     if request.method == "POST":
         input2 = request.form['input_id']
-        img = Img.query.filter_by(id=input2).first()
+        img = Img.query.filter_by(id=input2,name=current_user.username).first()
         if img == None:
             flash('查無此資料', 'danger')
         else:   
@@ -142,8 +143,9 @@ def query():
             return render_template("query.html",no_data=str3)
 
         for i in range(len(all_img)):
-            # all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')
+            # all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')            
             all_img[i].img = base64.b64encode(all_img[i].img)
+            all_img = all_img.decode("UTF-8")
         return render_template("query.html",to_quest=all_img)
     return render_template("query.html", image= None )
 
@@ -152,7 +154,7 @@ def query():
 def delete():
     if request.method == "POST":
         id = request.form['patient_name']
-        img = Img.query.filter_by(id=id).first()
+        img = Img.query.filter_by(id=id,name=current_user.username).first()
         if img == None:
             str4 = 'Sorry,查詢不到該筆紀錄'#當沒有搜尋到指定id，顯示str4文字(查詢不到)
             return render_template("delete.html",no_data_id=str4)
