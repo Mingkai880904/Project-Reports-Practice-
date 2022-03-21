@@ -205,7 +205,7 @@ def query():
 @app.route("/query", methods=["GET", "POST"])
 def query():
     if request.method == "POST":
-        input = request.form['patient_name']
+        input = request.form['id']
         all_img = Img.query.filter(Img.name == input).all()
         #decode_all_img = []
         print(all_img)
