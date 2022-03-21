@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<header class="site-header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div>
+      <img src="/static/logo-og.png" alt="KSU Logo" height="100px" style="display:block; margin:auto;" />
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar5">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/home">上傳</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/query">查詢</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/delete">刪除</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary" href="/update">修改</a></li> 
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank" title="崑山科技大學">KSU</a>
+        </li>
+        <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
+            title="資訊工程系">CSIE</a> </li>
+        <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutproject">作品介紹</a> </li>
+        <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutteam">小組介紹</a> </li>
+        <ul>
+    </div>
+    <div class="container">
+
+      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbar5">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+<body>
+  {% block content %} 
+  {% endblock content %}
+</body>
+</html>
