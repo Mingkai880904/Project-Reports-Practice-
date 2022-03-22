@@ -76,9 +76,9 @@ def login():
 # 	return render_template('index.html')
 
 
-@app.route('/Sign_up', methods=['GET'])
+@app.route('/register', methods=['GET'])
 def signup():
-    return render_template('Sign_up.html')
+    return render_template('register.html')
 
 
 # @app.route('/web', methods=['GET'])
