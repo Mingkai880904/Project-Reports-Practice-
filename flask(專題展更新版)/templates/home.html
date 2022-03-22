@@ -2,28 +2,7 @@
 <html>
 <header class="site-header">
   <nav class="navbar navbar-expand-lg navbar-light">
-    <div>
-      <img src="/static/logo-og.png" alt="KSU Logo" height="100px" style="display:block; margin:auto;" />
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbar5">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><a class="btn btn-outline-primary" href="/home">上傳</a></li>
-        <li class="nav-item"><a class="btn btn-outline-primary" href="/query">查詢</a></li>
-        <li class="nav-item"><a class="btn btn-outline-primary" href="/delete">刪除</a></li>
-        <li class="nav-item"><a class="btn btn-outline-primary" href="/update">修改</a></li> 
-      </ul>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank" title="崑山科技大學">KSU</a>
-        </li>
-        <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
-            title="資訊工程系">CSIE</a> </li>
-        <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutproject">作品介紹</a> </li>
-        <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutteam">小組介紹</a> </li>
-        <ul>
-    </div>
     <div class="container">
-
       <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
         data-target="#navbar5">
         <span class="navbar-toggler-icon"></span>
@@ -31,8 +10,74 @@
     </div>
   </nav>
 </header>
+
 <body>
-  {% block content %} 
-  {% endblock content %}
+
 </body>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-sm navbar-custom bg-steel fixed-top">
+      <div class="container">
+        <a class="navbar-brand mr-4" href="/"><b>CNN模型判別肺炎X光影像Web系統</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+          aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="btn btn-outline-primary" href="/home">上傳</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary" href="/query">查詢</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary" href="/delete">刪除</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary" href="/update">修改</a></li>
+        </ul> -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutproject">作品介紹</a> </li>
+          <li class="nav-item"> <a class="btn btn-outline-info" href="/aboutteam">小組介紹</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="https://www.ksu.edu.tw/" target="_blank"
+              title="崑山科技大學">KSU</a>
+          </li>
+          <li class="nav-item"> <a class="nav-link" href="https://web.ksu.edu.tw/DTCEIED/page/" target="_blank"
+              title="資訊工程系">CSIE</a> </li>
+
+          <ul>
+      </div>
+
+    </nav>
+  </header>
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="content-section"><br><br><br>
+          <!--隱藏sidebar-->
+          <h2 class="account-heading" id="username"><b>歡迎登入，<br>醫師</b></h2>
+          <br>
+          <h3><b>功能列</b></h3>
+          <p class='text-muted'>請選擇功能處理病患資料
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light"><a href="{{ url_for('home') }}">辨識X光片</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{{ url_for('query') }}">查詢病患資料</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{{ url_for('delete') }}">刪除資料</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{{ url_for('update') }}">修改資料</a></li>
+          </ul>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-8">
+        {% block content %}
+        {% endblock content %}
+      </div>  
+    </div>
+  </main>
+</body>
+
+
+
+
+
+<style>
+  .navbar-custom {
+    background-color: #191970;
+  }
+</style>
+
 </html>
