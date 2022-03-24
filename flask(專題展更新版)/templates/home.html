@@ -48,15 +48,14 @@
     <div class="row">
       <div class="col-md-4">
         <div class="content-section"><br><br><br>
-          <h2 class="account-heading" id="username"><b>歡迎登入，{{query_user.user_name}}<br>醫師</b></h2>
           <br>
           <h3><b>功能列</b></h3>
           <p class='text-muted'>請選擇功能處理病患資料
           <ul class="list-group">
-            <li class="list-group-item list-group-item-light"><a href="{{ url_for('home') }}">辨識X光片</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{{ url_for('login') }}">辨識X光片</a></li>
             <li class="list-group-item list-group-item-light"><a href="{{ url_for('query') }}">查詢病患資料</a></li>
-            <li class="list-group-item list-group-item-light"><a href="{{ url_for('delete') }}">刪除資料</a></li>
-            <li class="list-group-item list-group-item-light"><a href="{{ url_for('update') }}">修改資料</a></li>
+            <!-- <li class="list-group-item list-group-item-light"><a href="{{ url_for('delete') }}">刪除資料</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{{ url_for('update') }}">修改資料</a></li> -->
           </ul>
           </p>
         </div>

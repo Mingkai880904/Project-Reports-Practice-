@@ -28,7 +28,7 @@
   {% block content %} 
   <div>
     <div class="container"><br><br><br>
-      <h1>CNN模型判別肺炎X光影像Web系統</h1>
+      <h2 class="account-heading" id="username"><b>歡迎登入，{{query_user.user_name}}醫師</b></h2>
       <div class="row">
         <div
           class="px-md-5 p-3 col-lg-6 d-flex flex-column align-items-start justify-content-center order-1 order-lg-2">
@@ -49,7 +49,7 @@
 
                   <br>
                   <label for="bday">請輸入醫師代號:</label>
-                  <input type="text" name="patient_name" placeholder="請輸入醫師代號" />
+                  <input type="text" name="patient_name" placeholder="請輸入醫師代號" value="{{query_user.user_name}}" disabled="disabled" />
                   <br>
                   <label for="bday">請輸入病患姓名:</label>
                   <input type="text" name="pa_name" placeholder="請輸入病患姓名" />

@@ -50,12 +50,12 @@ def hello_world():
     return render_template("index.html")
 
 
-database = {'admin': '123', 'ksu': 'ksu', 'cnn': 'cnn'}
+# database = {'admin': '123', 'ksu': 'ksu', 'cnn': 'cnn'}
 
 
-@app.route('/home', methods=['POST', 'GET'])
-def home():
-    return render_template('upload.html')
+# @app.route('/home', methods=['POST', 'GET'])
+# def home():
+#     return render_template('upload.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
