@@ -1,6 +1,12 @@
 
 from db import db
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Text, nullable=False)
+    user_name= db.Column(db.Text, nullable=False)
+    email = db.Column(db.Text, nullable=False)
+    password = db.Column(db.Text, nullable=False)
 
 class Img(db.Model):
     id = db.Column(db.Integer, primary_key=True)

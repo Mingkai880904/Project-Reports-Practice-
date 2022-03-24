@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
     <head>
@@ -65,18 +65,18 @@
             <label for="user_name">User name：</label><br />
             <label for="email">Email：</label><br />
             <label for="psw">Password：</label><br />
-            <label for="psw-repeat">Repeat Password：</label><br />
         </div>
     </div>
-    <div class="Data-Items">
-        <input type="text" id="user_id" name="user_id" placeholder="user_id"/><br />
-        <input type="text" id="user_name" name="user_name" placeholder="user_name"/><br />
-        <input type="text" id="email" name="email" placeholder="email"/><br />
-        <input type="text" id="psw" name="psw" placeholder="psw"/><br />
-        <input type="text" id="psw-repeat" name="psw-repeat" placeholder="psw-repeat"/><br /><br /><br /><br /><br />
-    </div>
-    <button type="button" class="btn btn-primary">註冊</button>
-    <a href="/" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回</a>
+    <form method=post enctype="multipart/form-data">
+        <input type="text"  name="user_id" placeholder="user_id"/><br />
+        <input type="text"  name="user_name" placeholder="user_name"/><br />
+        <input type="text"  name="email" placeholder="email"/><br />
+        <input type="text"  name="password" placeholder="password"/><br />
+        <button type="submit" class="btn btn-primary">註冊</button>
+        <a href="/" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">返回</a>
+    </form>
+    
+
 
   
     

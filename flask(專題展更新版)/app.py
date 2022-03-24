@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 from re import A
-from flask import Flask, render_template, request,flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 import numpy as np
 import os
 import cv2
@@ -12,7 +12,7 @@ from tensorflow.python.keras.preprocessing.image import img_to_array
 
 
 from db import db_init, db
-from models import Img
+from models import Img, User
 
 from keras.preprocessing.image import load_img  # test
 from PIL import Image
@@ -28,7 +28,7 @@ from werkzeug.utils import secure_filename
 import base64
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///img1227.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///img0323.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'cnn'
 
@@ -48,8 +48,9 @@ model.make_predict_function()
 @app.route('/')
 def hello_world():
     return render_template("index.html")
-   
-database = {'admin': '123', 'ksu': 'ksu' , 'cnn': 'cnn'}
+
+
+database = {'admin': '123', 'ksu': 'ksu', 'cnn': 'cnn'}
 
 
 @app.route('/home', methods=['POST', 'GET'])
@@ -61,23 +62,31 @@ def home():
 def login():
     name1 = request.form['username']
     pwd = request.form['password']
-    if name1 not in database:
-        return render_template('index.html', info='Invalid User')
+    query_user =  User.query.filter_by(user_id=name1,password=pwd).first()
+    if query_user != None:
+            return render_template('upload.html',query_user=query_user)
     else:
-        if database[name1] != pwd:
-            return render_template('index.html', info='Invalid Password')
-        else:
-            return render_template('upload.html', name=name1)
-
-
+            str2='非使用者'
+            return render_template('index.html', no_user=str2)   
+   
 
 # @app.route('/')
 # def index():
 # 	return render_template('index.html')
 
 
-@app.route('/register', methods=['GET'])
-def signup():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        user_id1 = request.form['user_id']
+        user_name1 = request.form['user_name']
+        email1 = request.form['email']
+        password1 = request.form['password']
+        user_to_db = User(user_id=user_id1, user_name=user_name1,
+                          email=email1, password=password1)
+        db.session.add(user_to_db)  # 新增使用者到資料庫db中
+        db.session.commit()
+        print(user_to_db)
     return render_template('register.html')
 
 
@@ -260,8 +269,8 @@ def delete():
         img = Img.query.filter_by(id=id).first()
         if img == None:
             # return '未查詢到欲刪除資料!'
-            str4 = 'Sorry,查詢不到該筆紀錄'#當沒有搜尋到指定id，顯示str4文字(查詢不到)
-            return render_template("delete.html",no_data_id=str4)
+            str4 = 'Sorry,查詢不到該筆紀錄'  # 當沒有搜尋到指定id，顯示str4文字(查詢不到)
+            return render_template("delete.html", no_data_id=str4)
         db.session.delete(img)
         db.session.commit()
         flash('該筆紀錄已刪除!!', 'success')
@@ -293,8 +302,8 @@ def update():
         update_datetime = request.form['update_datetime']
         img = Img.query.filter_by(id=search_id).first()
         if img == None:
-            str4 = 'Sorry,查詢不到該筆紀錄'#當沒有搜尋到指定id，顯示str4文字(查詢不到)
-            return render_template("update.html",no_data=str4)
+            str4 = 'Sorry,查詢不到該筆紀錄'  # 當沒有搜尋到指定id，顯示str4文字(查詢不到)
+            return render_template("update.html", no_data=str4)
         img.pa_name = update_name
         img.datetime = update_datetime
         db.session.commit()
