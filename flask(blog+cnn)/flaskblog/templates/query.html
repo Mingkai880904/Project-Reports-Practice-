@@ -45,7 +45,7 @@
   <br>
   <br>
   <br>
-  <h2 class="text-center">點擊查詢按鈕以繼續</h2>
+  <h2 class="text-center">點擊查詢按鈕以繼續(不能修改)</h2>
   <div class="text-center">
     <input type="text" name="id" value="{{current_user.username}}" readonly=readonly>
     <button type="submit" class="btn btn-info">查詢</button>
@@ -54,18 +54,44 @@
   <br>
   <h3><b>{{no_data}}</b></h3>
   {% for img in to_quest %}
-  <div class="text-left">
-    <img src="data:image/jpg;base64,{{img.img}}" width="250" height="250" >
-    <!-- <input type="text" id="myText" value="{{img.name}}">
-    <input type="text" id="myText" value="{{img.pa_name}}"> -->
-
-    <h3 class="text-left">編號: {{img.id}}</h3>
-    <h3 class="text-left">Doctor ID : {{img.name}}</h3>
-    <h3 class="text-left">Patinent name : {{img.pa_name}}<input type="text"  id="update_pa" value="{{img.pa_name}}"></h3>
-    <h3 class="text-left">Datetime : {{img.datetime}}<input type="date"  name="datetime" id="update_date" value="{{img.datetime}}" /></h3>
-    <h3 class="text-left">Result : {{img.answer}}</h3>
-    <hr class="my-6">
-  </div>
+  <table>
+    <tr>
+      <th>編號</th>
+      <th>圖片</th>
+      <th>醫師ID</th>
+      <th>病患姓名</th>
+      <th>日期</th>
+      <th>結果</th>
+    </tr>
+    <tr>
+      <td>
+        <input type="checkbox" id="cbox1" >
+      </td>
+      <td>
+        <h3 class="text-center">{{img.id}}</h3>
+      </td>
+      <td><img src="data:;base64,{{img.img}}" width="100" height="100" class="text-center"></td>
+      <td>
+        <h3 class="text-center">{{img.name}}</h3>
+      </td>
+      <td>
+        <h3 class="text-center">{{img.pa_name}}</h3>
+      </td>
+      <td>
+        <h3 class="text-center">{{img.datetime}}</h3>
+      </td>
+      <td>
+        <h3 class="text-center">{{img.answer}}</h3>
+      </td>
+    </tr>
+  </table><br>
+  <style>
+    table,
+    th,
+    td {
+      border: 3px solid black;
+    }
+  </style>
   {% endfor %}
     
 </form>

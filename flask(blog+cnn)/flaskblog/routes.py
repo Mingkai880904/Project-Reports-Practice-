@@ -59,7 +59,9 @@ def about():
 @app.route("/update2", methods=["GET", "POST"])
 def update2():
     if request.method == "POST":
-        input2 = request.form['input_id']
+        input2 = request.form['input_id'] #搜尋編號
+        update_value1 =request.form['update_value1']
+        update_value2 =request.form['datetime']
         img = Img.query.filter_by(id=input2,name=current_user.username).first()
         if img == None:
             flash('查無此資料', 'danger')
@@ -80,7 +82,7 @@ def model_predict(img_path, model):
     return preds
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
 
@@ -132,23 +134,48 @@ def upload():
     return render_template('upload.html', title='Upload')
 
 
+# @app.route("/query", methods=["GET", "POST"])
+# def query():
+#     if request.method == "POST":
+#         input = request.form['id']
+#         all_img = Img.query.filter(Img.name == input).all()
+#         print(all_img)
+        
+#         if all_img == []:
+#             str3 = 'Sorry,查詢不到該筆紀錄'#當all_img是[]，顯示str3文字(查詢不到)
+#             return render_template("query.html",no_data=str3)
+
+#         for i in range(len(all_img)):
+#             all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')            
+#         #    # all_img[i].img = base64.b64encode(all_img[i].img)
+
+#         return render_template("query.html",to_quest=all_img)
+#         return render_template("query.html")
+#     return render_template("query.html", image= None )
 @app.route("/query", methods=["GET", "POST"])
 def query():
     if request.method == "POST":
         input = request.form['id']
         all_img = Img.query.filter(Img.name == input).all()
+        #decode_all_img = []
         print(all_img)
-        if all_img == []:
-            str3 = 'Sorry,查詢不到該筆紀錄'#當all_img是[]，顯示str3文字(查詢不到)
-            return render_template("query.html",no_data=str3)
-
+        # if all_img == []:
+        #     return '查詢不到該筆紀錄'   #當all_img是[]，顯示查詢不到
+        # for img in all_img:
         for i in range(len(all_img)):
-            # all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')            
-            all_img[i].img = base64.b64encode(all_img[i].img)
-            all_img = all_img.decode("UTF-8")
-        return render_template("query.html",to_quest=all_img)
-    return render_template("query.html", image= None )
+            # nparr = np.fromstring(img.img, np.uint8)# 讀取byte64結構，存成圖片並傳入地址
+            #image_a = cv2.imdecode(nparr, cv2.IMREAD_ANYCOLOR)
+            #now = datetime.now().timestamp()
+            #cv2.imwrite('./static/displayDB/temp'+str(now)+'.png', image_a)
+            # time.sleep(2)
+            # image_a='temp'+str(now)+'.png'
 
+            # print(all_img[i].answer)
+            all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')
+            # print(all_img[i].img)
+
+        return render_template("query.html", to_quest=all_img)
+    return render_template("query.html", image=None)
 
 @app.route("/delete", methods=['GET', 'POST'])
 def delete():
