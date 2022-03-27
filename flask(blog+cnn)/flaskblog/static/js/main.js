@@ -37,7 +37,7 @@ $(document).ready(function () {
         // Make prediction by calling api /predict
         $.ajax({
             type: 'POST',
-            url: '/upload',
+            url: '/predict',
             data: form_data,
             contentType: false,
             cache: false,
@@ -63,7 +63,7 @@ $(document).ready(function () {
         // Make prediction by calling api /predict
         $.ajax({
             type: 'POST',
-            url: '/upload',
+            url: '/predict',
             data: form_data,
             contentType: false,
             cache: false,
