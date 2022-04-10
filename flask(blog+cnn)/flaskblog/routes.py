@@ -59,14 +59,15 @@ def about():
 @app.route("/update2", methods=["GET", "POST"])
 def update2():
     if request.method == "POST":
-        input2 = request.form['input_id'] #搜尋編號
-        update_value1 =request.form['update_value1']
-        update_value2 =request.form['datetime']
-        img = Img.query.filter_by(id=input2,name=current_user.username).first()
+        input2 = request.form['input_id']  # 搜尋編號
+        update_value1 = request.form['update_value1']
+        update_value2 = request.form['datetime']
+        img = Img.query.filter_by(
+            id=input2, name=current_user.username).first()
         if img == None:
             flash('查無此資料', 'danger')
-        else:   
-            return render_template("update.html", id=img.id,name=img.name,pa_name=img.pa_name,datetime=img.datetime,answer=img.answer)
+        else:
+            return render_template("update.html", id=img.id, name=img.name, pa_name=img.pa_name, datetime=img.datetime, answer=img.answer)
     return render_template('update.html', title='Update2')
 
 
@@ -140,13 +141,13 @@ def upload():
 #         input = request.form['id']
 #         all_img = Img.query.filter(Img.name == input).all()
 #         print(all_img)
-        
+
 #         if all_img == []:
 #             str3 = 'Sorry,查詢不到該筆紀錄'#當all_img是[]，顯示str3文字(查詢不到)
 #             return render_template("query.html",no_data=str3)
 
 #         for i in range(len(all_img)):
-#             all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')            
+#             all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')
 #         #    # all_img[i].img = base64.b64encode(all_img[i].img)
 
 #         return render_template("query.html",to_quest=all_img)
@@ -173,19 +174,19 @@ def query():
             # print(all_img[i].answer)
             all_img[i].img = base64.b64encode(all_img[i].img).decode('ascii')
             # print(all_img[i].img)
-
         return render_template("query.html", to_quest=all_img)
     return render_template("query.html", image=None)
+
 
 @app.route("/delete", methods=['GET', 'POST'])
 def delete():
     if request.method == "POST":
         id = request.form['patient_name']
-        img = Img.query.filter_by(id=id,name=current_user.username).first()
+        img = Img.query.filter_by(id=id, name=current_user.username).first()
         if img == None:
-            str4 = 'Sorry,查詢不到該筆紀錄'#當沒有搜尋到指定id，顯示str4文字(查詢不到)
-            return render_template("delete.html",no_data_id=str4)
-        else:    
+            str4 = 'Sorry,查詢不到該筆紀錄'  # 當沒有搜尋到指定id，顯示str4文字(查詢不到)
+            return render_template("delete.html", no_data_id=str4)
+        else:
             db.session.delete(img)
             db.session.commit()
             flash('該筆紀錄已刪除!!', 'success')
@@ -302,3 +303,31 @@ def delete_post(post_id):
     db.session.commit()
     flash('你的貼文已刪除!', 'success')
     return redirect(url_for('home'))
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route("/query/<query_id>")
+def query_all(query_id):
+    query2 = Img.query.get_or_404(query_id)  # 有get到值，沒有則顯示404
+    return render_template('query2.html',query2=query2)
+
+@app.route("/query/<query_id>/delete", methods=['POST'])
+@login_required
+def delete_query(query_id):
+    query2 = Img.query.get_or_404(query_id)  # 有get到值，沒有則顯示404
+    db.session.delete(query2)
+    db.session.commit()
+    flash('該筆紀錄已成功刪除!', 'success')
+    return redirect(url_for('query'))
+
+
+
