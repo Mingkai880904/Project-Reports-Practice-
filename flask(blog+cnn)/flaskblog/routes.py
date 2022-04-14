@@ -8,7 +8,7 @@ from fileinput import filename
 from turtle import title
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskblog import app, db, bcrypt  # 從flaskblog資料夾 import app db bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
+from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm,UpdateQueryForm
 from flaskblog.models import User, Post, Img
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.utils import secure_filename
@@ -329,5 +329,19 @@ def delete_query(query_id):
     flash('該筆紀錄已成功刪除!', 'success')
     return redirect(url_for('query'))
 
-
+@app.route("/query/<query_id>/update", methods=['GET', 'POST']) 
+@login_required
+def update_query(query_id):
+    query2 = Img.query.get_or_404(query_id)  # 有get到值，沒有則顯示404
+    form2 = UpdateQueryForm()
+    if form2.validate_on_submit():
+        query2.pa_name = form2.pa_name.data
+        query2.datetime = form2.datetime.data
+        db.session.commit()
+        flash('你的貼文已更新!', 'success')
+        return redirect(url_for('query')) #成功更新後回查詢頁面
+    elif request.method == 'GET':
+        form2.pa_name.data = query2.pa_name
+        form2.datetime.data = query2.datetime
+    return render_template('create_query.html', form2=form2)
 

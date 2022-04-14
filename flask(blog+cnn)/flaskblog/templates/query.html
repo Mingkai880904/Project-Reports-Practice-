@@ -42,16 +42,19 @@
   <br>
   <br>
   <form method=post enctype="multipart/form-data" id="ksu" >
-    <h1 class="text-center">辨識紀錄查詢</h1>
+    <h1 class="text-center"><b>辨識紀錄查詢</b></h1>
     <br>
     <br>
     <br>
-    <h2 class="text-center">點擊查詢按鈕以繼續(不能修改)</h2>
+    <h2 class="text-center"><b>點擊查詢按鈕以繼續</b></h2><br>
+   
+
     <div class="text-center">
       <input type="text" name="id" value="{{current_user.username}}" readonly=readonly>
       <button type="submit" class="btn btn-info">查詢</button>
     </div>
-
+    <br>
+ <h5 class="text-center"><b>#點選編輯來修改或刪除該筆資料</b></h5>
     <br>
     <h3><b>{{no_data}}</b></h3>
     {% for img in to_quest %}
@@ -67,7 +70,7 @@
       </tr>
       <tr>
         <td>
-          <h5><a class="article-title" href="{{url_for('query_all',query_id=img.id)}}">更多...</a></h5>
+          <h5><a class="article-title" href="{{url_for('query_all',query_id=img.id)}}">編輯</a></h5>
         </td>
         <td>
           <h3 class="text-center">{{img.id}}</h3>

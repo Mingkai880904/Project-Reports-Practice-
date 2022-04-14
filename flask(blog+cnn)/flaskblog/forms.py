@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
@@ -60,4 +61,9 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Title',validators=[DataRequired()])
     content = TextAreaField('Content',validators=[DataRequired()])
+    submit = SubmitField('Post')
+
+class UpdateQueryForm(FlaskForm):
+    pa_name = StringField('Pa_name',validators=[DataRequired()])
+    datetime = StringField('Datetime',validators=[DataRequired()])
     submit = SubmitField('Post')
